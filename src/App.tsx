@@ -1,7 +1,14 @@
 import React from 'react';
+import { Heading } from './components/Heading';
+import { Board } from './components/Board';
 
 function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <div className="container">
+      <Heading />
+      <Board />
+    </div>
+  );
 }
 
 export default App;
