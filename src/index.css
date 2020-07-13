@@ -148,11 +148,18 @@ body {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  line-height: 40px;
   background-color: var(--socket-empty);
 }
 
 .row-socket:not(:last-child) {
   margin-right: 5px;
+}
+
+.row-socket-filled {
+  background-color: var(--white);
+  font-weight: bold;
+  border: 1px solid var(--black);
 }
 
 .row-hints {
