@@ -6,3 +6,8 @@ export const SOCKET_NUMBER = 4;
 
 // Array of strings instead of numbers to avoid stringifying ids in the future
 export const OPTIONS = ['0', '1', '2', '3', '4', '5'];
+
+export interface Hints {
+  black: number;
+  white: number;
+}
