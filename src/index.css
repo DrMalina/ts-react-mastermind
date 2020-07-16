@@ -156,7 +156,7 @@ body {
   margin-right: 5px;
 }
 
-.row-socket-filled {
+.row-socket__filled {
   background-color: var(--white);
   font-weight: bold;
   border: 1px solid var(--black);
@@ -175,6 +175,14 @@ body {
   height: 10px;
   border-radius: 50%;
   background-color: var(--socket-empty);
+}
+
+.row-hint__filled--white {
+  background-color: var(--white);
+}
+
+.row-hint__filled--black {
+  background-color: var(--black);
 }
 
 .row-hint:nth-child(odd) {
