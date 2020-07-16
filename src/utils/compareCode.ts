@@ -1,13 +1,17 @@
 import { Hints } from '../shared/';
 
 export const compareCode = (code: number[], guess: number[]): Hints => {
-  return guess.reduce(
+  const guessCopy = [...guess];
+
+  return code.reduce(
     (acc, item, idx) => {
-      if (code.includes(item)) {
-        if (code[idx] === guess[idx]) {
-          acc['black'] = acc['black'] + 1;
+      if (guessCopy.includes(item)) {
+        if (code[idx] === guessCopy[idx]) {
+          acc['black']++;
+          guessCopy[idx] = -1; // to not count that same element again in next iteration
         } else {
-          acc['white'] = acc['white'] + 1;
+          acc['white']++;
+          guessCopy[guessCopy.indexOf(item)] = -1;
         }
       }
       return acc;
