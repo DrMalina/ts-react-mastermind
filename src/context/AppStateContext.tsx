@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { OPTIONS } from '../shared';
+import { OPTIONS_NUMBER, Hints } from '../shared';
 import { generateCode } from '../utils/generateCode';
 
 interface History {
   guess: number[];
+  hints: Hints;
 }
 
 interface AppState {
@@ -26,12 +27,13 @@ interface AppStateProivder {
 type Action =
   | { type: 'ADD_GUESS'; payload: number }
   | { type: 'UNDO_GUESS' }
-  | { type: 'ADD_TO_HISTORY' }
-  | { type: 'INCREMENT_ROW' };
+  | { type: 'ADD_TO_HISTORY'; payload: Hints }
+  | { type: 'SET_WIN'; payload: boolean };
+
+const optionsArray = [...Array(OPTIONS_NUMBER)].map((_item, idx) => idx);
 
 const appData: AppState = {
-  // secretCode: generateCode(OPTIONS, 4),
-  secretCode: [1, 1, 2, 4],
+  secretCode: generateCode(optionsArray, 4),
   currentGuess: [],
   history: [],
   currentRowIndex: 1,
@@ -49,13 +51,13 @@ const appStateReducer = (state: AppState, action: Action): AppState => {
     case 'ADD_TO_HISTORY': {
       return {
         ...state,
-        history: [...state.history, { guess: state.currentGuess }],
         currentGuess: [],
         currentRowIndex: state.currentRowIndex + 1,
+        history: [...state.history, { guess: state.currentGuess, hints: action.payload }],
       };
     }
-    case 'INCREMENT_ROW': {
-      return { ...state, currentGuess: [], currentRowIndex: state.currentRowIndex++ };
+    case 'SET_WIN': {
+      return { ...state, isWin: action.payload };
     }
     default: {
       return state;

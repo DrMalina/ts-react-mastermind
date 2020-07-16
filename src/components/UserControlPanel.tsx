@@ -1,13 +1,28 @@
 import React from 'react';
-import { OPTIONS } from '../shared';
 import { useAppState } from '../context/AppStateContext';
+import { compareCode } from '../utils/compareCode';
+import { OPTIONS_NUMBER, ROWS_NUMBER } from '../shared';
 
 export const UserControlPanel = () => {
   const { state, dispatch } = useAppState();
 
-  const addToGuess = (id: string): void => {
+  const addToGuess = (item: number): void => {
     if (state.currentGuess.length < 4) {
-      dispatch({ type: 'ADD_GUESS', payload: id });
+      dispatch({ type: 'ADD_GUESS', payload: item });
+
+      if (state.currentGuess.length === 3) {
+        const hints = compareCode(state.secretCode, [...state.currentGuess, item]);
+
+        if (hints.black === 4) {
+          dispatch({ type: 'SET_WIN', payload: true });
+        }
+
+        if (state.currentRowIndex === ROWS_NUMBER) {
+          dispatch({ type: 'SET_WIN', payload: false });
+        }
+
+        dispatch({ type: 'ADD_TO_HISTORY', payload: hints });
+      }
     }
 
     return;
@@ -21,12 +36,26 @@ export const UserControlPanel = () => {
     return;
   };
 
+  const toggleDisable = () => {
+    if (typeof state.isWin !== 'undefined') {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <div className="user-control">
       <div className="options">
-        {OPTIONS.map((item, idx) => (
-          <button key={idx} className="option" id={item} onClick={() => addToGuess(item)}>
-            {item}
+        {[...Array(OPTIONS_NUMBER)].map((_item, idx) => (
+          <button
+            key={idx}
+            className="option"
+            id={idx.toString()}
+            onClick={() => addToGuess(idx)}
+            disabled={toggleDisable()}
+          >
+            {idx}
           </button>
         ))}
       </div>
