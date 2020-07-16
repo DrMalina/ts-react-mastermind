@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppState } from '../context/AppStateContext';
-import { SOCKET_NUMBER } from '../shared';
+import { convertHintsToArray } from '../utils/convertToArray';
+import { SOCKETS_NUMBER } from '../shared';
 
 interface RowProps {
   id: string;
@@ -21,17 +22,17 @@ export const Row = ({ id }: RowProps) => {
       const prevGuess = history[id].guess;
       return prevGuess.map((_item, idx) => {
         return (
-          <div key={idx} className="row-socket row-socket-filled">
+          <div key={idx} className="row-socket row-socket__filled">
             {prevGuess[idx]}
           </div>
         );
       });
     } else {
       //  render current guess sockets
-      return [...Array(SOCKET_NUMBER)].map((_item, idx) => {
+      return [...Array(SOCKETS_NUMBER)].map((_item, idx) => {
         if (currentRowIndex === id + 1 && typeof currentGuess[idx] !== 'undefined') {
           return (
-            <div key={idx} className="row-socket row-socket-filled">
+            <div key={idx} className="row-socket row-socket__filled">
               {currentGuess[idx]}
             </div>
           );
@@ -42,16 +43,29 @@ export const Row = ({ id }: RowProps) => {
     }
   };
 
+  const renderHints = (rowId: string): JSX.Element[] => {
+    const id = +rowId - 1;
+
+    return [...Array(SOCKETS_NUMBER)].map((_item, idx) => {
+      if (history[id]) {
+        const hintsArray = convertHintsToArray(history[id].hints);
+        return (
+          <div
+            key={idx}
+            className={`row-hint ${hintsArray[idx] ? `row-hint__filled--${hintsArray[idx]}` : ''}`}
+          ></div>
+        );
+      } else {
+        return <div key={idx} className="row-hint"></div>;
+      }
+    });
+  };
+
   return (
     <div className="row" id={id}>
       <span className="row-numeracy">{id}.</span>
       <div className="row-sockets">{renderSockets(id)}</div>
-      <div className="row-hints">
-        <div className="row-hint"></div>
-        <div className="row-hint"></div>
-        <div className="row-hint"></div>
-        <div className="row-hint"></div>
-      </div>
+      <div className="row-hints">{renderHints(id)}</div>
     </div>
   );
 };
