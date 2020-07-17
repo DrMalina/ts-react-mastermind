@@ -1,6 +1,6 @@
 import React from 'react';
-import { SOCKETS_NUMBER } from '../shared';
-import { useAppState } from '../context/AppStateContext/';
+import { SOCKETS_NUMBER } from '../../shared';
+import { useAppState } from '../../context/AppStateContext';
 
 export const SecretCode = () => {
   const {

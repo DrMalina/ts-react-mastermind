@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAppState } from '../context/AppStateContext/';
-import { convertHintsToArray } from '../utils/convertToArray';
-import { SOCKETS_NUMBER } from '../shared';
+import { useAppState } from '../../context/AppStateContext';
+import { convertHintsToArray } from '../../utils/convertToArray';
+import { SOCKETS_NUMBER } from '../../shared';
 
 interface RowProps {
   id: string;
