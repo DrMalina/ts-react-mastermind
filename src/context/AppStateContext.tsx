@@ -28,7 +28,8 @@ type Action =
   | { type: 'ADD_GUESS'; payload: number }
   | { type: 'UNDO_GUESS' }
   | { type: 'ADD_TO_HISTORY'; payload: Hints }
-  | { type: 'SET_WIN'; payload: boolean };
+  | { type: 'SET_WIN'; payload: boolean }
+  | { type: 'RESET_GAME' };
 
 const optionsArray = [...Array(OPTIONS_NUMBER)].map((_item, idx) => idx);
 
@@ -58,6 +59,9 @@ const appStateReducer = (state: AppState, action: Action): AppState => {
     }
     case 'SET_WIN': {
       return { ...state, isWin: action.payload };
+    }
+    case 'RESET_GAME': {
+      return { ...appData, secretCode: generateCode(optionsArray, 4) };
     }
     default: {
       return state;
