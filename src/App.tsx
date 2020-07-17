@@ -1,13 +1,19 @@
 import React from 'react';
-import { Heading } from './components/Heading';
 import { Board } from './components/Board';
+import { Heading } from './components/Heading';
+import { Instructions } from './components/Instructions';
+import { Modal } from './components/Modal';
 
 function App() {
   return (
-    <div className="container">
+    <>
+      <Modal />
       <Heading />
-      <Board />
-    </div>
+      <div className="container">
+        <Instructions />
+        <Board />
+      </div>
+    </>
   );
 }
 
