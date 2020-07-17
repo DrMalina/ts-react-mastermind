@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
-import { useAppState } from '../context/AppStateContext/';
+import { useAppState } from '../../context/AppStateContext/';
 
 export const Modal = () => {
   const { state, dispatch } = useAppState();
