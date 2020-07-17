@@ -27,10 +27,92 @@ body {
 }
 
 #root > .container {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 450px) {
+  #root > .container {
+    margin-top: 0;
+  }
+
+  .board-wrapper .board {
+    margin-top: 10px;
+    max-width: 300px;
+  }
+
+  .board .secret-code__sockets {
+    margin-top: 20px;
+  }
+
+  .board .secret-code__socket {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+  }
+
+  .board .secret-code span {
+    font-size: 12px;
+  }
+
+  .board .row {
+    margin-top: 0;
+  }
+
+  .board .row .row-socket {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+  }
+
+  .instructions {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  #root > .container {
+    flex-direction: column;
+  }
+
+  .instructions {
+    order: 2;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* INSTRUCTIONS */
+.instructions {
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.info-list {
+  padding-left: 25px;
+}
+
+.info-list li {
+  margin-top: 12px;
+}
+
+.instructions p {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 /* HEADING */
@@ -64,8 +146,12 @@ body {
 }
 
 /* BOARD */
+.board-wrapper {
+  flex: 1;
+}
+
 .board {
-  max-width: 350px;
+  max-width: 320px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -190,7 +276,7 @@ body {
 }
 
 .row-numeracy {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* OPTIONS */
@@ -201,22 +287,23 @@ body {
 }
 
 .options {
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .option {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 1px solid var(--black);
   border-radius: 50%;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-  line-height: 50px;
+  line-height: 40px;
   cursor: pointer;
+  background-color: var(--white);
 }
 
 .option:not(:last-child) {
@@ -224,14 +311,42 @@ body {
 }
 
 .undo {
-  font-weight: bold;
-  border: 1px solid var(--black);
-  padding: 10px 50px;
-  margin-top: 20px;
   cursor: pointer;
+  border: 1px solid var(--black);
+  padding: 10px 30px;
+  text-transform: uppercase;
+  font-size: 12px;
+  background-color: var(--white);
 }
 
 .undo svg {
-  height: 15px;
-  width: 20px;
+  height: 12px;
+  width: 18px;
+}
+
+/* MODAL */
+.modal {
+  text-align: center;
+}
+
+.modal-btn {
+  cursor: pointer;
+  border: 1px solid var(--black);
+  padding: 10px 30px;
+  text-transform: uppercase;
+  font-size: 12px;
+  background-color: var(--white);
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.restart-btn {
+  cursor: pointer;
+  border: 1px solid var(--black);
+  padding: 10px 30px;
+  text-transform: uppercase;
+  font-size: 12px;
+  background-color: var(--white);
+  margin-right: 10px;
 }
