@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import { useAppState } from '../../context/AppStateContext/';
 
 export const Modal = () => {
   const { state, dispatch } = useAppState();
-  const [isModalClosed, setIsModalClosed] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof state.isWin !== 'undefined') {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+    }
+  }, [state.isWin]);
 
   const renderMessage = () => {
     if (state.isWin) {
@@ -18,7 +26,7 @@ export const Modal = () => {
           <button className="modal-btn" onClick={() => dispatch({ type: 'RESET_GAME' })}>
             Play again
           </button>
-          <button className="modal-btn" onClick={() => setIsModalClosed(false)}>
+          <button className="modal-btn" onClick={() => setIsModalOpen(false)}>
             Close
           </button>
         </>
@@ -34,7 +42,7 @@ export const Modal = () => {
           <button className="modal-btn" onClick={() => dispatch({ type: 'RESET_GAME' })}>
             Play again
           </button>
-          <button className="modal-btn" onClick={() => setIsModalClosed(false)}>
+          <button className="modal-btn" onClick={() => setIsModalOpen(false)}>
             Close
           </button>
         </>
@@ -43,7 +51,7 @@ export const Modal = () => {
   };
 
   return (
-    <Popup open={typeof state.isWin !== 'undefined' && isModalClosed} modal closeOnDocumentClick>
+    <Popup open={isModalOpen} modal closeOnDocumentClick>
       <div className="modal">{renderMessage()}</div>
     </Popup>
   );
