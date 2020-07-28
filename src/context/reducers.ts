@@ -1,7 +1,7 @@
 import { Action } from './actions';
-import { AppState, appData } from './state';
-import { generateCode } from '../../utils/generateCode';
-import { optionsArray } from '../../shared';
+import { appData } from './state';
+import { generateCode } from '../utils/generateCode';
+import { AppState, optionsArray } from '../shared';
 
 export const appStateReducer = (state: AppState, action: Action): AppState => {
   switch (action.type) {

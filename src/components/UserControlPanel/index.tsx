@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppState } from '../../context/AppStateContext';
+import { useAppState } from '../../context';
 import { compareCode } from '../../utils/compareCode';
 import { OPTIONS_NUMBER, ROWS_NUMBER } from '../../shared';
 
@@ -37,11 +37,7 @@ export const UserControlPanel = () => {
   };
 
   const toggleDisable = () => {
-    if (typeof state.isWin !== 'undefined') {
-      return true;
-    }
-
-    return false;
+    return typeof state.isWin !== 'undefined';
   };
 
   return (

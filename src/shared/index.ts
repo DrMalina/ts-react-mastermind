@@ -10,3 +10,16 @@ export interface Hints {
   black: number;
   white: number;
 }
+
+export interface History {
+  guess: number[];
+  hints: Hints;
+}
+
+export interface AppState {
+  secretCode: number[];
+  currentGuess: number[];
+  history: History[];
+  currentRowIndex: number;
+  isWin: undefined | boolean;
+}

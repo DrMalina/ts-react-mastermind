@@ -1,7 +1,7 @@
 import React from 'react';
-import { Row } from './Row';
-import { SecretCode } from './SecretCode';
-import { UserControlPanel } from './UserControlPanel';
+import { Row } from '../Row';
+import { SecretCode } from '../SecretCode';
+import { UserControlPanel } from '../UserControlPanel';
 import { ROWS_NUMBER } from '../../shared';
 
 export const Board = () => {

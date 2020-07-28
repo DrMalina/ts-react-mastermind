@@ -1,7 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import { Action } from './actions';
+import { appData } from './state';
 import { appStateReducer } from './reducers';
-import { AppState, appData } from './state';
+import { AppState } from '../shared';
 
 interface AppStateContextProps {
   state: AppState;

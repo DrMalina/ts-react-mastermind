@@ -1,4 +1,4 @@
-import { Hints } from '../../shared';
+import { Hints } from '../shared';
 
 export type Action =
   | { type: 'ADD_GUESS'; payload: number }
